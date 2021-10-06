@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Inmobiliaria.Models;
 
 namespace Inmobiliaria.Models
 {
@@ -9,5 +10,7 @@ namespace Inmobiliaria.Models
         }
 
         public DbSet<Vivienda> Viviendas { get; set; }
+
+        public DbSet<Inmobiliaria.Models.Operacion> Operacion { get; set; }
     }
 }

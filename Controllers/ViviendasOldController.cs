@@ -41,7 +41,7 @@ namespace Inmobiliaria.Controllers
         public ActionResult<Vivienda> Create(Vivienda vivienda)
         {
             // This code will save the inmueble and return a result
-            vivienda = ViviendaService.Add(new Vivienda { Domicilio = vivienda.Domicilio } );
+            vivienda = ViviendaService.Add(new Vivienda { DomicilioCalle = vivienda.DomicilioCalle } );
             return vivienda;
         }
 

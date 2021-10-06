@@ -23,7 +23,7 @@ namespace Inmobiliaria.Services
             foreach (string linea in System.IO.File.ReadLines(@"viviendas.csv"))
             {
                 Console.WriteLine(linea);
-                Viviendas.Add( new Vivienda { Id = lineNumber, Domicilio = linea } );
+                Viviendas.Add( new Vivienda { Id = lineNumber, DomicilioCalle = linea } );
                 lineNumber++;
             }
 
@@ -40,11 +40,11 @@ namespace Inmobiliaria.Services
 
         public static Vivienda Get(int id) => Viviendas.FirstOrDefault(item => item.Id == id);
 
-        public static List<Vivienda> TraerPorDomicilio(string textoABuscar) => Viviendas.FindAll(item => item.Domicilio.Contains(textoABuscar));
+        public static List<Vivienda> TraerPorDomicilio(string textoABuscar) => Viviendas.FindAll(item => item.DomicilioCalle.Contains(textoABuscar));
 
         public static Vivienda Add(Vivienda inmueble)
         {
-            System.IO.File.AppendAllText("viviendas.csv", inmueble.Domicilio + Environment.NewLine);
+            System.IO.File.AppendAllText("viviendas.csv", inmueble.DomicilioCalle + Environment.NewLine);
             inmueble.Id = Viviendas.Count + 1;
             Viviendas.Add(inmueble);
             return inmueble;
