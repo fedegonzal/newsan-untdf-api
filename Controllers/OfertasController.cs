@@ -11,47 +11,47 @@ namespace Inmobiliaria.Controllers
 {
     [Route("api/1.0/[controller]")]
     [ApiController]
-    public class ViviendasController : ControllerBase
+    public class OfertasController : ControllerBase
     {
         private readonly InmobiliariaContext _context;
 
-        public ViviendasController(InmobiliariaContext context)
+        public OfertasController(InmobiliariaContext context)
         {
             _context = context;
         }
 
-        // GET: api/Viviendas
+        // GET: api/Ofertas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Vivienda>>> GetViviendas()
+        public async Task<ActionResult<IEnumerable<Oferta>>> GetOferta()
         {
-            return await _context.Vivienda.ToListAsync();
+            return await _context.Oferta.ToListAsync();
         }
 
-        // GET: api/Viviendas/5
+        // GET: api/Ofertas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Vivienda>> GetVivienda(int id)
+        public async Task<ActionResult<Oferta>> GetOferta(int id)
         {
-            var vivienda = await _context.Vivienda.FindAsync(id);
+            var oferta = await _context.Oferta.FindAsync(id);
 
-            if (vivienda == null)
+            if (oferta == null)
             {
                 return NotFound();
             }
 
-            return vivienda;
+            return oferta;
         }
 
-        // PUT: api/Viviendas/5
+        // PUT: api/Ofertas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVivienda(int id, Vivienda vivienda)
+        public async Task<IActionResult> PutOferta(int id, Oferta oferta)
         {
-            if (id != vivienda.Id)
+            if (id != oferta.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(vivienda).State = EntityState.Modified;
+            _context.Entry(oferta).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +59,7 @@ namespace Inmobiliaria.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ViviendaExists(id))
+                if (!OfertaExists(id))
                 {
                     return NotFound();
                 }
@@ -72,36 +72,36 @@ namespace Inmobiliaria.Controllers
             return NoContent();
         }
 
-        // POST: api/Viviendas
+        // POST: api/Ofertas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Vivienda>> PostVivienda(Vivienda vivienda)
+        public async Task<ActionResult<Oferta>> PostOferta(Oferta oferta)
         {
-            _context.Vivienda.Add(vivienda);
+            _context.Oferta.Add(oferta);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVivienda", new { id = vivienda.Id }, vivienda);
+            return CreatedAtAction("GetOferta", new { id = oferta.Id }, oferta);
         }
 
-        // DELETE: api/Viviendas/5
+        // DELETE: api/Ofertas/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVivienda(int id)
+        public async Task<IActionResult> DeleteOferta(int id)
         {
-            var vivienda = await _context.Vivienda.FindAsync(id);
-            if (vivienda == null)
+            var oferta = await _context.Oferta.FindAsync(id);
+            if (oferta == null)
             {
                 return NotFound();
             }
 
-            _context.Vivienda.Remove(vivienda);
+            _context.Oferta.Remove(oferta);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool ViviendaExists(int id)
+        private bool OfertaExists(int id)
         {
-            return _context.Vivienda.Any(e => e.Id == id);
+            return _context.Oferta.Any(e => e.Id == id);
         }
     }
 }

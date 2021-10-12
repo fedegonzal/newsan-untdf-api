@@ -9,8 +9,8 @@ namespace Inmobiliaria.Models
         {
         }
 
-        public DbSet<Vivienda> Viviendas { get; set; }
-
+        public DbSet<Inmobiliaria.Models.Vivienda> Vivienda { get; set; }
         public DbSet<Inmobiliaria.Models.Operacion> Operacion { get; set; }
+        public DbSet<Inmobiliaria.Models.Oferta> Oferta { get; set; }
     }
 }

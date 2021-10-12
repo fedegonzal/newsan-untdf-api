@@ -15,5 +15,7 @@ namespace Inmobiliaria.Models
         public bool GasNatural { get; set; }
         public float Latitud { get; set; }
         public float Longitud { get; set; }
+
+        //public ICollection<Oferta> Ofertas { get; set; }
     }
 }

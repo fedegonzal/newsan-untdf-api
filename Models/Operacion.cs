@@ -10,5 +10,7 @@ namespace Inmobiliaria.Models
         public int Id { get; set; }
         public string Nombre { get; set; }
         public float Tolerancia { get; set; }
+
+        //public ICollection<Oferta> Ofertas { get; set; }
     }
 }
