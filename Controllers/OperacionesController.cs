@@ -46,7 +46,7 @@ namespace Inmobiliaria.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOperacion(int id, Operacion operacion)
         {
-            if (id != operacion.Id)
+            if (id != operacion.OperacionId)
             {
                 return BadRequest();
             }
@@ -79,8 +79,8 @@ namespace Inmobiliaria.Controllers
         {
             _context.Operacion.Add(operacion);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetOperacion", new { id = operacion.Id }, operacion);
+            
+            return CreatedAtAction("GetOperacion", new { id = operacion.OperacionId }, operacion);
         }
 
         // DELETE: api/Operaciones/5
@@ -101,7 +101,7 @@ namespace Inmobiliaria.Controllers
 
         private bool OperacionExists(int id)
         {
-            return _context.Operacion.Any(e => e.Id == id);
+            return _context.Operacion.Any(e => e.OperacionId == id);
         }
     }
 }

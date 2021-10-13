@@ -7,7 +7,7 @@ namespace Inmobiliaria.Models
 {
     public class Vivienda
     {
-        public int Id { get; set; }
+        public int ViviendaId { get; set; }
         public string DescripcionCorta { get; set; }
         public string DomicilioCalle { get; set; }
         public string DomicilioNumero { get; set; }
@@ -16,6 +16,6 @@ namespace Inmobiliaria.Models
         public float Latitud { get; set; }
         public float Longitud { get; set; }
 
-        //public ICollection<Oferta> Ofertas { get; set; }
+//        public virtual ICollection<Oferta> Ofertas { get; set; }
     }
 }

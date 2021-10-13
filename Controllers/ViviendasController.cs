@@ -46,7 +46,7 @@ namespace Inmobiliaria.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVivienda(int id, Vivienda vivienda)
         {
-            if (id != vivienda.Id)
+            if (id != vivienda.ViviendaId)
             {
                 return BadRequest();
             }
@@ -80,7 +80,7 @@ namespace Inmobiliaria.Controllers
             _context.Vivienda.Add(vivienda);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVivienda", new { id = vivienda.Id }, vivienda);
+            return CreatedAtAction("GetVivienda", new { id = vivienda.ViviendaId }, vivienda);
         }
 
         // DELETE: api/Viviendas/5
@@ -101,7 +101,7 @@ namespace Inmobiliaria.Controllers
 
         private bool ViviendaExists(int id)
         {
-            return _context.Vivienda.Any(e => e.Id == id);
+            return _context.Vivienda.Any(e => e.ViviendaId == id);
         }
     }
 }

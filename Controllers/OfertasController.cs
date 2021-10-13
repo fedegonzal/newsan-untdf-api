@@ -24,7 +24,12 @@ namespace Inmobiliaria.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Oferta>>> GetOferta()
         {
-            return await _context.Oferta.ToListAsync();
+            //return await _context.Oferta.ToListAsync();
+
+            return await _context.Oferta
+                .Include(item => item.Vivienda)
+                .Include(item => item.Operacion)
+                .ToListAsync();
         }
 
         // GET: api/Ofertas/5
@@ -46,7 +51,7 @@ namespace Inmobiliaria.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOferta(int id, Oferta oferta)
         {
-            if (id != oferta.Id)
+            if (id != oferta.OfertaId)
             {
                 return BadRequest();
             }
@@ -78,9 +83,10 @@ namespace Inmobiliaria.Controllers
         public async Task<ActionResult<Oferta>> PostOferta(Oferta oferta)
         {
             _context.Oferta.Add(oferta);
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOferta", new { id = oferta.Id }, oferta);
+            return CreatedAtAction("GetOferta", new { id = oferta.OfertaId }, oferta);
         }
 
         // DELETE: api/Ofertas/5
@@ -101,7 +107,7 @@ namespace Inmobiliaria.Controllers
 
         private bool OfertaExists(int id)
         {
-            return _context.Oferta.Any(e => e.Id == id);
+            return _context.Oferta.Any(e => e.OfertaId == id);
         }
     }
 }

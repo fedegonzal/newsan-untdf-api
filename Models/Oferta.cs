@@ -8,13 +8,11 @@ namespace Inmobiliaria.Models
 {
     public class Oferta
     {
-        public int Id { get; set; }
+        public int OfertaId { get; set; }
         public float Precio { get; set; }
 
-//        public int ViviendaId { get; set; }
         public Vivienda Vivienda { get; set; }
 
-//        public int OperacionId { get; set; }
         public Operacion Operacion { get; set; }
     }
 }
