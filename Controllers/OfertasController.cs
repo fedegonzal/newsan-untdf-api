@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Inmobiliaria.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Inmobiliaria.Models;
 
 namespace Inmobiliaria.Controllers
 {
@@ -24,12 +22,13 @@ namespace Inmobiliaria.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Oferta>>> GetOferta()
         {
-            //return await _context.Oferta.ToListAsync();
+            return await _context.Oferta.ToListAsync();
 
-            return await _context.Oferta
+            /*return await _context.Oferta
                 .Include(item => item.Vivienda)
                 .Include(item => item.Operacion)
                 .ToListAsync();
+            */
         }
 
         // GET: api/Ofertas/5
@@ -42,6 +41,9 @@ namespace Inmobiliaria.Controllers
             {
                 return NotFound();
             }
+
+            oferta.Operacion = _context.Operacion.Find(oferta.OperacionId);
+            oferta.Vivienda = _context.Vivienda.Find(oferta.ViviendaId);
 
             return oferta;
         }

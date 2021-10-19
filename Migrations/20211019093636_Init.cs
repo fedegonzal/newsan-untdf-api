@@ -3,7 +3,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace Inmobiliaria.Migrations
 {
-    public partial class inicio : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,8 +47,8 @@ namespace Inmobiliaria.Migrations
                     OfertaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Precio = table.Column<float>(type: "float", nullable: false),
-                    ViviendaId = table.Column<int>(type: "int", nullable: true),
-                    OperacionId = table.Column<int>(type: "int", nullable: true)
+                    ViviendaId = table.Column<int>(type: "int", nullable: false),
+                    OperacionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,13 +58,13 @@ namespace Inmobiliaria.Migrations
                         column: x => x.OperacionId,
                         principalTable: "Operacion",
                         principalColumn: "OperacionId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Oferta_Vivienda_ViviendaId",
                         column: x => x.ViviendaId,
                         principalTable: "Vivienda",
                         principalColumn: "ViviendaId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

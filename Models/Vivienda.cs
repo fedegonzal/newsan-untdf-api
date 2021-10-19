@@ -16,6 +16,6 @@ namespace Inmobiliaria.Models
         public float Latitud { get; set; }
         public float Longitud { get; set; }
 
-//        public virtual ICollection<Oferta> Ofertas { get; set; }
+        //public virtual ICollection<Oferta> Ofertas { get; set; }
     }
 }
