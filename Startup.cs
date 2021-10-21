@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Inmobiliaria.Models;
+using System.Text.Json.Serialization;
 
 namespace Inmobiliaria
 {
@@ -26,8 +27,12 @@ namespace Inmobiliaria
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-//            services.AddDbContext<InmobiliariaContext>(opt => opt.UseInMemoryDatabase("Inmobiliaria"));
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
+            //            services.AddDbContext<InmobiliariaContext>(opt => opt.UseInMemoryDatabase("Inmobiliaria"));
             services.AddDbContext<InmobiliariaContext>(opt => opt.UseMySQL("server=localhost;database=inmob_newsan;user=user;password=123456"));
         }
 

@@ -14,7 +14,7 @@ namespace Inmobiliaria.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.10");
+                .HasAnnotation("ProductVersion", "5.0.11");
 
             modelBuilder.Entity("Inmobiliaria.Models.Oferta", b =>
                 {
@@ -57,6 +57,40 @@ namespace Inmobiliaria.Migrations
                     b.ToTable("Operacion");
                 });
 
+            modelBuilder.Entity("Inmobiliaria.Models.Propietario", b =>
+                {
+                    b.Property<int>("PropietarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Apellido")
+                        .HasColumnType("text");
+
+                    b.Property<long>("DNI")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("text");
+
+                    b.HasKey("PropietarioId");
+
+                    b.ToTable("Propietario");
+                });
+
+            modelBuilder.Entity("Inmobiliaria.Models.TipoVivienda", b =>
+                {
+                    b.Property<int>("TipoViviendaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("text");
+
+                    b.HasKey("TipoViviendaId");
+
+                    b.ToTable("TipoVivienda");
+                });
+
             modelBuilder.Entity("Inmobiliaria.Models.Vivienda", b =>
                 {
                     b.Property<int>("ViviendaId")
@@ -84,15 +118,35 @@ namespace Inmobiliaria.Migrations
                     b.Property<float>("Longitud")
                         .HasColumnType("float");
 
+                    b.Property<int>("TipoViviendaId")
+                        .HasColumnType("int");
+
                     b.HasKey("ViviendaId");
 
+                    b.HasIndex("TipoViviendaId");
+
                     b.ToTable("Vivienda");
+                });
+
+            modelBuilder.Entity("PropietarioVivienda", b =>
+                {
+                    b.Property<int>("PropietariosPropietarioId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ViviendasViviendaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PropietariosPropietarioId", "ViviendasViviendaId");
+
+                    b.HasIndex("ViviendasViviendaId");
+
+                    b.ToTable("PropietarioVivienda");
                 });
 
             modelBuilder.Entity("Inmobiliaria.Models.Oferta", b =>
                 {
                     b.HasOne("Inmobiliaria.Models.Operacion", "Operacion")
-                        .WithMany()
+                        .WithMany("Ofertas")
                         .HasForeignKey("OperacionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -106,6 +160,42 @@ namespace Inmobiliaria.Migrations
                     b.Navigation("Operacion");
 
                     b.Navigation("Vivienda");
+                });
+
+            modelBuilder.Entity("Inmobiliaria.Models.Vivienda", b =>
+                {
+                    b.HasOne("Inmobiliaria.Models.TipoVivienda", "TipoVivienda")
+                        .WithMany("Viviendas")
+                        .HasForeignKey("TipoViviendaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TipoVivienda");
+                });
+
+            modelBuilder.Entity("PropietarioVivienda", b =>
+                {
+                    b.HasOne("Inmobiliaria.Models.Propietario", null)
+                        .WithMany()
+                        .HasForeignKey("PropietariosPropietarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Inmobiliaria.Models.Vivienda", null)
+                        .WithMany()
+                        .HasForeignKey("ViviendasViviendaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Inmobiliaria.Models.Operacion", b =>
+                {
+                    b.Navigation("Ofertas");
+                });
+
+            modelBuilder.Entity("Inmobiliaria.Models.TipoVivienda", b =>
+                {
+                    b.Navigation("Viviendas");
                 });
 #pragma warning restore 612, 618
         }

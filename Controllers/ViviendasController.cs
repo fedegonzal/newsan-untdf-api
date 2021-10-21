@@ -1,9 +1,11 @@
-﻿using Inmobiliaria.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Inmobiliaria.Models;
 
 namespace Inmobiliaria.Controllers
 {
@@ -20,7 +22,7 @@ namespace Inmobiliaria.Controllers
 
         // GET: api/Viviendas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Vivienda>>> GetViviendas()
+        public async Task<ActionResult<IEnumerable<Vivienda>>> GetVivienda()
         {
             return await _context.Vivienda.ToListAsync();
         }
