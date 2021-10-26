@@ -32,7 +32,6 @@ namespace Inmobiliaria
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
-            //            services.AddDbContext<InmobiliariaContext>(opt => opt.UseInMemoryDatabase("Inmobiliaria"));
             services.AddDbContext<InmobiliariaContext>(opt => opt.UseMySQL("server=localhost;database=inmob_newsan;user=user;password=123456"));
         }
 

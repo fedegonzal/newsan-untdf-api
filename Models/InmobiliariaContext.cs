@@ -7,19 +7,6 @@ namespace Inmobiliaria.Models
     {
         public InmobiliariaContext(DbContextOptions<InmobiliariaContext> options) : base(options)
         {
-            //Configuration.LazyLoadingEnabled = true;
-            //Configuration.ProxyCreationEnabled = true;            
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-/*            modelBuilder.Entity<TipoVivienda>()
-                .HasMany(item => item.Viviendas)
-                .WithOne();
-
-            modelBuilder.Entity<Vivienda>()
-                .HasOne(item => item.TipoVivienda)
-                .WithMany(item => item.Viviendas);*/
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

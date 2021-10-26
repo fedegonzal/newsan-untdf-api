@@ -152,7 +152,7 @@ namespace Inmobiliaria.Migrations
                         .IsRequired();
 
                     b.HasOne("Inmobiliaria.Models.Vivienda", "Vivienda")
-                        .WithMany()
+                        .WithMany("Ofertas")
                         .HasForeignKey("ViviendaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -196,6 +196,11 @@ namespace Inmobiliaria.Migrations
             modelBuilder.Entity("Inmobiliaria.Models.TipoVivienda", b =>
                 {
                     b.Navigation("Viviendas");
+                });
+
+            modelBuilder.Entity("Inmobiliaria.Models.Vivienda", b =>
+                {
+                    b.Navigation("Ofertas");
                 });
 #pragma warning restore 612, 618
         }

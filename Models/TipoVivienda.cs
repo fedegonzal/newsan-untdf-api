@@ -11,6 +11,6 @@ namespace Inmobiliaria.Models
 
         public string Nombre { set; get; }
 
-        public virtual ICollection<Vivienda> Viviendas { get; set; } = new List<Vivienda>();
+        public virtual ICollection<Vivienda> Viviendas { get; set; }
     }
 }
