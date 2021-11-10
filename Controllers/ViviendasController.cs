@@ -100,7 +100,6 @@ namespace Inmobiliaria.Controllers
         [HttpPost]
         public async Task<ActionResult<Vivienda>> PostVivienda(Vivienda vivienda)
         {
-
             // A cada uno de los propietarios recibidos lo agregamos a la vivienda
             foreach (var item in vivienda.PropietariosList)
             {

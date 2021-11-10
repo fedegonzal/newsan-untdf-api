@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Inmobiliaria.Models;
+using System.Net.Http;
+using System.Net;
 
 namespace Inmobiliaria.Controllers
 {
@@ -26,6 +28,29 @@ namespace Inmobiliaria.Controllers
         {
             return await _context.Oferta.ToListAsync();
         }
+
+
+        // GET: api/ofertas/buscar
+        [HttpGet("buscar")]
+        public dynamic Buscar(string operacion, float precioMin = 0, float precioMax = 99999999999999999)
+        {
+            return _context.Oferta
+                .Where(item => 
+                    item.Precio >= precioMin && 
+                    item.Precio <= precioMax && 
+                    item.Operacion.Nombre == operacion
+                )
+                .Select(item => new { 
+                    item.Precio, 
+                    Operacion = item.Operacion.Nombre,
+                    Domicilio = item.Vivienda.DomicilioCalle + " " + item.Vivienda.DomicilioNumero,
+                    item.Vivienda.GasNatural,
+                    TipoVivienda = item.Vivienda.TipoVivienda.Nombre
+                })
+                .ToList();
+
+        }
+
 
         // GET: api/Ofertas/5
         [HttpGet("{id}")]
